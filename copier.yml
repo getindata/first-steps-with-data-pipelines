@@ -1,0 +1,39 @@
+project_name:
+  type: str
+  help: Name of the project (use alphanumeric characters with _)
+  default: my_new_project
+
+project_description:
+  type: str
+  help: Short project description
+  default: Project for transforming data
+
+gcp_project_id:
+  type: str
+  help: Project id used in GCP
+
+pipeline_owner:
+  type: str
+  help: Owner of the pipeline in airflow
+  default: DataOps Team
+
+schedule_interval:
+  type: str
+  help: Cron expression
+  default: 0 12 * * *
+
+_exclude:
+  - .git
+
+_min_copier_version: "5.1.0"
+
+_skip_if_exists:
+  - models
+  - tests
+
+#_tasks:
+#  - "git add -A"
+#  - "git commit -m 'Initial project or upgrade'"
+#  - "git push"
+
+_templates_suffix: .tmpl

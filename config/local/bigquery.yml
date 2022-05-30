@@ -1,0 +1,4 @@
+method: oauth
+keyfile: ""
+dataset: "{{ var('username') }}_private_working_schema"
+timeout_seconds: 200
