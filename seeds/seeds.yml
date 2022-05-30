@@ -1,0 +1,28 @@
+version: 2
+
+seeds:
+  - name: countries
+    description: "{{ doc('countries') }}"
+    columns:
+      - name: id
+        description: "Unique country ID number"
+      - name: acronym2
+        description: "Abbreviation - variant 1"
+      - name: acronym3
+        description: "Abbreviation - variant 2"
+      - name: name
+        description: "Name of the country"
+
+  - name: customers
+    description: "{{ doc('customers') }}"
+    columns:
+      - name: customerId
+        description: "Unique customer ID number"
+      - name: countryId
+        description: "Id of customer country"
+      - name: email
+        description: "Email of a customer"
+      - name: isActive
+        description: "Is account active"
+      - name: accountCreationTime
+        description: "Date of customer account creation"

@@ -1,0 +1,10 @@
+# Default ignored files
+target/
+dbt_modules/
+dbt_packages/
+logs/
+.idea
+.user.yml
+
+# data-pipelines-cli
+/build/

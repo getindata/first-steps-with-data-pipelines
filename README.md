@@ -1,92 +1,140 @@
 # First steps with Data Pipelines
 
-This is an introduction demo to Data Pipelines. This is an example of a very simple project that that shows how to create simple processing pipelines and tests for your data processing project.
+This is an example of a simple Data Pipeline project with small amount of data and a simple pipeline and test scenario.
+The purpose is to show you how the contents of a project can look like to create a simple data processing pipeline.
+Hopefully thanks to this you will make your first steps with Data Pipeline tool faster.
 
-## Getting started
+This is an example of a simple Data Pipeline project. If You are looking for a more advanced project, a project with many pipelines, tables and
+views, tests and seeds you can find it [here](https://gitlab.com/getindata/dataops/tpc-h-data-pipelines-demo).
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Data used
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+For the purpose of this simple project demo all we use the data from 2 CSV files that are placed in the seeds folder.
+No other data is being used. Data in both of the CSV files was generated.
 
-## Add your files
+## Environment preparation
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Here we will explain how to make it possible to use Data Pipeline on an instance of
+GCP Vertex AI JupyterLab notebook.
+
+Go to Vertex AI on GCP console. On the menu choose Workbench. You should be able to see currently existing Notebooks.
+For purpose of this example create a new notebook. We will be using our publically available environment image.
+
+Click new Notebook button. There choose "Customize...". Name your notebook, specify Region and Zone
+and for environment scrollbar choose "Custom container" option.
+Then for docker container image paste the image:
+```
+gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.5
+```
+
+You can configure the rest of the parameters or leave them as they are.
+When You are done click Create button. After some time an instance of Notebook with
+proper image installed should be available and we should be able to start setting up
+the environment.
+
+## Config files in config directory
+
+There are many files describing the configuration of the environment. These files were generated from template. 
+For the purpose of this demo you do not need to worry about altering the contents of these files.
+
+## Setting up DP
+
+We expect that the whole organization will be using the same Data Pipeline initialization project that specifies which
+templates (DP projects) they are using. Initialization makes it possible to set up some dp variables that can be used
+across the whole company. We specify the repository path where we specified the variables that we want dp to be using.
+We can have many initialization repos depending on what we want to do with our project. For the purpose of this demo
+the only variable we are going to use in the init repository is going to be
+```username``` which is going to be used in many dp commands.
+
+Here is how you can initialize dp:
+```
+dp init <path to init repo>
+```
+
+If this if your first DP project and You do not have your own templates of projects then
+here is an example of a publically available DP init repository that You can use:
+```
+dp init https://github.com/getindata/data-pipelines-cli-init-example
+```
+
+You can add more options to dp.yml file with other templates of projects to choose from. Specify their template_names
+and the template_paths to git repositories. You can also specify more vars for use in Your projects.
+The example initialization asks about the name of user, this name will be later used in other operations but
+You typically have to run init command only once.
+
+## Creation of our project
+
+After the initialization is complete we can start using DP to create projects with project templates.
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/getindata/dataops/first-steps-with-data-pipelines.git
-git branch -M main
-git push -uf origin main
+dp create <project path> <template path>
 ```
 
-## Integrate with your tools
+Project path is a location where we want our project to be created. Usually this is just a directory name.
+Here is an example of a publically available template of a DP project:
+```
+https://github.com/getindata/data-pipelines-template-example
+```
 
-- [ ] [Set up project integrations](https://gitlab.com/getindata/dataops/first-steps-with-data-pipelines/-/settings/integrations)
+Here, we will be asked some questions about which template to use for a new project, the name of the project,
+the name of GCP project that we are working on, the cron that specifies at what times should the DP pipeline run and a
+description of the created project.
 
-## Collaborate with your team
+Be aware that the name of the DP project should be written using alpha-numeric signs plus the underscore sign.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+After answering these questions Copier will be used to create contents of our projects using the specified project template.
 
-## Test and Deploy
+![](/images/project_creation.png)
 
-Use the built-in continuous integration in GitLab.
+## Running pipelines and tests using Data Pipeline tool
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+This project contains some seeds, models and tests that were added to simulate how pipelines could look like at an organization.
+To understand more about models, tests and seeds please read about them at the
+[DBT Documentation](https://docs.getdbt.com/docs/building-a-dbt-project/documentation).
 
-***
+Here is an example of what output of this command can look like based on the contents of this repository.
 
-# Editing this README
+```
+dp seed
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+![](/images/simple_output_seed.png)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+In this repository there are 2 CSV files specified that contain some data.
+After running this command the tables with contents of CSV files will be created in a BigQuery dataset.
+The name of the dataset to put results into is a result of schema name generation. The name of user we specify in
+initialization step is used in this process.
 
-## Name
-Choose a self-explaining name for your project.
+Below is a picture of the contents of 2 tables generated in BigQuery based on the seed CSV files:
+![](/images/simple_bigquery_seed.png)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+The contents of these tables can be used in some of the models that we specify.
+Now we should be ready to run our models:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+```
+dp run
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![](/images/simple_run_output.png)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+This process will look at the contents of the models directory and create coresponding tables or views in our BigQuery Dataset:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+![](/images/simple_run_bigquery.png)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Now after all the tables and views are created we can also check, if the models work as intended by running the tests:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```
+dp test
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+![](/images/simple_test_output.png)
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+We should be able to see the summary, we can see if everything is fine or there is an error with a specific test.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Resources:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- More about [data-pipelines-cli](https://data-pipelines-cli.readthedocs.io/en/latest/usage.html#)
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Understand [Copier](https://copier.readthedocs.io/en/stable/)
+- Try [Airlfow](https://airflow.apache.org/)
