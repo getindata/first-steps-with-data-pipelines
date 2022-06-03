@@ -4,13 +4,8 @@ This is an example of a simple Data Pipeline project with small amount of data a
 The purpose is to show you how the contents of a project can look like to create a simple data processing pipeline.
 Hopefully thanks to this you will make your first steps with Data Pipeline tool faster.
 
-This is an example of a simple Data Pipeline project. If You are looking for a more advanced project, a project with many pipelines, tables and
-views, tests and seeds you can find it [here](https://gitlab.com/getindata/dataops/tpc-h-data-pipelines-demo).
-
-## Data used
-
-For the purpose of this simple project demo all we use the data from 2 CSV files that are placed in the seeds folder.
-No other data is being used. Data in both of the CSV files was generated.
+This is an example of a simple Data Pipeline project. If you are looking for a more advanced project, a project with many pipelines, tables and
+views, tests and seeds you can find it [here](https://github.com/getindata/tpc-h-data-pipelines-demo.git).
 
 ## Environment preparation
 
@@ -28,13 +23,18 @@ gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.5
 ```
 
 You can configure the rest of the parameters or leave them as they are.
-When You are done click Create button. After some time an instance of Notebook with
+When you are done click Create button. After some time an instance of Notebook with
 proper image installed should be available and we should be able to start setting up
 the environment.
 
+## Data used
+
+For the purpose of this simple project demo all we use the data from 2 CSV files that are placed in the seeds folder.
+No other data is being used. Data in both of the CSV files was generated.
+
 ## Config files in config directory
 
-There are many files describing the configuration of the environment. These files were generated from template. 
+There are many files describing the configuration of the environment. These files were generated from template.
 For the purpose of this demo you do not need to worry about altering the contents of these files.
 
 ## Setting up DP
@@ -51,23 +51,23 @@ Here is how you can initialize dp:
 dp init <path to init repo>
 ```
 
-If this if your first DP project and You do not have your own templates of projects then
-here is an example of a publically available DP init repository that You can use:
+If this if your first DP project and you do not have your own templates of projects then
+here is an example of a publically available DP init repository that you can use:
 ```
 dp init https://github.com/getindata/data-pipelines-cli-init-example
 ```
 
 You can add more options to dp.yml file with other templates of projects to choose from. Specify their template_names
-and the template_paths to git repositories. You can also specify more vars for use in Your projects.
+and the template_paths to git repositories. You can also specify more vars for use in your projects.
 The example initialization asks about the name of user, this name will be later used in other operations but
-You typically have to run init command only once.
+you typically have to run init command only once.
 
 ## Creation of our project
 
 After the initialization is complete we can start using DP to create projects with project templates.
 
 ```
-dp create <project path> <template path>
+dp create <project path> <template path> 
 ```
 
 Project path is a location where we want our project to be created. Usually this is just a directory name.
