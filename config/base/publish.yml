@@ -1,0 +1,4 @@
+repository: git@gitlab.com:getindata/dataops/published-dbt-packages.git
+branch: main
+username: "DataOps Team"
+email: "DataOps Team@getindata.com"

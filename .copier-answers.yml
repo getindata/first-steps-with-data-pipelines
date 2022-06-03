@@ -1,0 +1,8 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: b0617e8
+_src_path: https://github.com/getindata/data-pipelines-template-example.git
+gcp_project_name: gid-dataops-labs
+pipeline_owner: DataOps Team
+project_description: Simple transforming
+project_name: simple_project
+schedule_interval: 0 12 * * *
