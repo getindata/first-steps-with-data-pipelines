@@ -1,5 +1,0 @@
-image:
-  repository: europe-central2-docker.pkg.dev/gid-dataops-labs/composer-dags/simple_project
-  tag: <IMAGE_TAG>
-
-type: k8s

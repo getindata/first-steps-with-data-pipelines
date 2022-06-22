@@ -1,9 +1,0 @@
-method: service-account
-keyfile: "{{ env_var('GCP_KEY_PATH') }}"
-project: gid-dataops-labs
-dataset: presentation
-timeout_seconds: 300
-priority: interactive
-location: europe-central2
-threads: 1
-retries: 1
