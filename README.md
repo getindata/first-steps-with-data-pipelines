@@ -8,14 +8,14 @@ use the tool for running simple data pipelines on [GCP BigQuery](https://cloud.g
 This project can be used as a project template for [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) tool.
 Hopefully thanks to this you will make your first steps with [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) tool faster.
 
-This is an example of a simple [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) project. If you are looking for a more advanced project, a project with many pipelines, tables and
+This is an example of a simple [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) (DP) project. If you are looking for a more advanced project, a project with many pipelines, tables and
 views, tests and seeds you can find it [here](https://github.com/getindata/tpc-h-data-pipelines-demo.git).
 
-## Demo prerequisites
-- You need to have a project on [Google Cloud Platform](https://cloud.google.com/), we will be running DP on [Vertex AI](https://cloud.google.com/vertex-ai)
+## Prerequisites
+- A project on [Google Cloud Platform](https://cloud.google.com/) - we will be running DP on [Vertex AI](https://cloud.google.com/vertex-ai)
   Notebook and the results of our pipelines will be stored on [GCP BigQuery](https://cloud.google.com/bigquery)
-- You need to have basic understanding of SQL
-- You need not to be afraid of a command line
+- Basic understanding of SQL
+- Some experience with a command line
 
 ## Data used
 For the purpose of this simple project demo we will use the data from 2 CSV files that are placed in the seeds folder.
@@ -35,14 +35,14 @@ Choose [Vertex AI](https://cloud.google.com/vertex-ai) on the tool menu on the l
 ![](images/creating_vertexai_notebook_existing_notebooks.png)
 
 For purpose of this example create a new notebook. We will be using our publically available environment image.
-Click new Notebook button. There choose "Customize...". Name your notebook, specify Region, Zone
+Click `+ NEW NOTEBOOK` button. There choose `Customize...`. Name your notebook, specify Region, Zone
 and for environment scrollbar choose "Custom container" option.
 Then for docker container image instead of clicking ```select```, copy and paste this image:
 ```
 gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.6
 ```
 
-For machine type, n1-standard-1 (1 vCPU, 3.75 GB RAM) should be good enough for the purpose of this demo.
+For machine type, **n1-standard-1 (1 vCPU, 3.75 GB RAM)** should be good enough for the purpose of this demo.
 You can leave other parameters as they are and click ```Create button```.
 
 ![](images/creating_vertexai_notebook_options_filled_in_1.png)
@@ -58,7 +58,7 @@ an instance that we just created. The interface for our notebook should open. Se
 
 ![](images/notebook_open_console.png)
 
-After clicking the ```console``` it should appear in a moment.
+After clicking the ```Terminal``` it should appear in a moment.
 
 ![](images/command_line_should_appear_shortly.png)
 
@@ -105,10 +105,10 @@ dp create <project path> <template path>
 ```
 
 ```project path``` says in which folder our project, that will be created should be placed. Usually this is just a directory name.
-```template path``` is a path of a template to use for creating a new project. This parameter can be skipped. If skipped
-we will be able to choose one template of a project from a list specified in the that are specified in ```.dp.yml``` file.
+```template path``` is a path of a template to use for creating a new project. This parameter can be skipped - then
+we are able to choose one template of a project from a list specified in the ```.dp.yml``` file.
 
-For the purpose of this demo, we will use a template already specified in .dp.yml file. After executing this command:
+For the purpose of this demo, we will use a template already specified in `.dp.yml` file. After executing this command:
 ```dp create our-simple-project``` we should be able to choose a template that we want to use from a list. 
 
 ![](images/project_creation_template_specification.png)
@@ -118,11 +118,11 @@ to use ```first-steps-with-data-pipelines``` template, which is actually the pro
 
 After pressing enter button, we will be asked some questions about which template to use for a new project, the name of the project,
 the name of GCP project that we are working on, the cron that specifies at what times should the DP pipeline run and a
-description of the created project. Answer these questions. Be aware that the name of the DP project should be written using alpha-numeric signs plus the underscore sign.
+description of the created project. Answer these questions. Be aware that the name of the DP project should be composed of alpha-numeric signs and the `_` sign.
 
 ![](images/project_creation_options_filled_in.png)
 
-After answering these questions Copier will be used to create contents of our projects using the specified project template.
+After answering these questions [Copier](https://copier.readthedocs.io/en/stable/) will be used to create contents of our projects using the specified project template.
 Good job! The project should have been created successfully.
 
 Now let's enter the project folder.
@@ -203,15 +203,15 @@ dp test
 
 We should be able to see the summary, we can see if everything with our models is fine and there are no errors.
 
-### Reminder:
-Remember that if you are interested in seeing a more advanced set of [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) you can check
-[here](https://github.com/getindata/tpc-h-data-pipelines-demo.git). Seeing a more complicated use case will make it easier for you
-to get inspiration on how to use [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) in your project.
+### Next steps
+If you are interested in more advanced use of [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) you can check
+[this repository](https://github.com/getindata/tpc-h-data-pipelines-demo.git). By familiarizing yourself with this resource, you will get 
+ a better understanding on how [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) could look like in your production project.
 
-## Resources:
+## Resources
 
 - More about [data-pipelines-cli](https://data-pipelines-cli.readthedocs.io/en/latest/usage.html#)
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Understand [Copier](https://copier.readthedocs.io/en/stable/)
-- Try [Airlfow](https://airflow.apache.org/)
+- More about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers about `dbt`
+- Rendering project templates with [Copier](https://copier.readthedocs.io/en/stable/) 
+- Data pipelines orchestration with [Airlfow](https://airflow.apache.org/) 
