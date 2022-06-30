@@ -206,7 +206,7 @@ We should be able to see the summary, we can see if everything with our models i
 ### Next steps
 If you are interested in more advanced use of [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) you can check
 [this repository](https://github.com/getindata/tpc-h-data-pipelines-demo.git). By familiarizing yourself with this resource, you will get 
- a better understanding on how [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) could look like in your production project.
+ a better understanding on how [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) could look like in your production project. Remember to push your work on a [Vertex AI](https://cloud.google.com/vertex-ai) notebook instance to your [Git](https://git-scm.com/doc) repository before stopping it if you want to continue in the future.
 
 ## Resources
 
