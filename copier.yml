@@ -22,6 +22,11 @@ schedule_interval:
   help: Cron expression
   default: 0 12 * * *
 
+generate_ingestion:
+    type: bool
+    default: false
+    help: Do you want to generate ingestion project?
+
 _exclude:
   - .git
 

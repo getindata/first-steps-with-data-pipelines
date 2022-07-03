@@ -1,0 +1,105 @@
+{
+    "connectionId": "c87e15af-73e5-4ed6-bef1-5df0b91814fc",
+    "name": "File <> BigQuery Warehouse",
+    "namespaceDefinition": "source",
+    "namespaceFormat": "${SOURCE_NAMESPACE}",
+    "prefix": "",
+    "sourceId": "9e6e3059-f476-4bcb-a98f-08868023069c",
+    "destinationId": "1d1c0160-6b8b-4ddb-aefa-a2bbea888bb9",
+    "operationIds": [
+      "fb9d1acb-b2d8-4548-89ee-19d499b1266c"
+    ],
+    "syncCatalog": {
+      "streams": [
+        {
+          "stream": {
+            "name": "covid_epidemiology",
+            "jsonSchema": {
+              "type": "object",
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "properties": {
+                "key": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "new_tested": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "new_deceased": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "total_tested": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "new_confirmed": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "new_recovered": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "total_deceased": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "total_confirmed": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "total_recovered": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "supportedSyncModes": [
+              "full_refresh"
+            ],
+            "defaultCursorField": [],
+            "sourceDefinedPrimaryKey": []
+          },
+          "config": {
+            "syncMode": "full_refresh",
+            "cursorField": [],
+            "destinationSyncMode": "overwrite",
+            "primaryKey": [],
+            "aliasName": "covid_epidemiology",
+            "selected": true
+          }
+        }
+      ]
+    },
+    "schedule": {
+      "units": 24,
+      "timeUnit": "hours"
+    },
+    "status": "active"
+  }
