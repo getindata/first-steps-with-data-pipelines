@@ -39,7 +39,7 @@ Click `+ NEW NOTEBOOK` button. There choose `Customize...`. Name your notebook, 
 and for environment scrollbar choose "Custom container" option.
 Then for docker container image instead of clicking ```select```, copy and paste this image:
 ```
-gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.6
+gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.7
 ```
 
 For machine type, **n1-standard-1 (1 vCPU, 3.75 GB RAM)** should be good enough for the purpose of this demo.
@@ -92,13 +92,8 @@ you typically have to run init command only once.
 
 ### 4. Creating our own project project
 
-After the initialization is complete we can start using DP. Before we start using DP with command line make sure that we are in ```jovyan``` folder:
-
-```
-cd /home/jovyan/
-```
-
-Now we will ```create``` a project using a project template. The ```dp create``` command can look like this:
+After the initialization is complete we can start using DP. Now we will ```create``` a project using a project template.
+The ```dp create``` command can look like this:
 
 ```
 dp create <project path> <template path> 
@@ -109,7 +104,10 @@ dp create <project path> <template path>
 we are able to choose one template of a project from a list specified in the ```.dp.yml``` file.
 
 For the purpose of this demo, we will use a template already specified in `.dp.yml` file. After executing this command:
-```dp create our-simple-project``` we should be able to choose a template that we want to use from a list. 
+```
+dp create our-simple-project
+```
+we should be able to choose a template that we want to use from a list. 
 
 ![](images/project_creation_template_specification.png)
 
@@ -127,7 +125,9 @@ Good job! The project should have been created successfully.
 
 Now let's enter the project folder.
 
-```cd our-simple-project```
+```
+cd our-simple-project
+```
 
 ### 5. Config files in config directory
 
