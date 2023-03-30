@@ -3,7 +3,7 @@
 default_args:
   owner: [[ pipeline_owner ]]
   depends_on_past: False
-  start_date: [[ now().strftime("%Y-%m-%dT00:00:00") ]]
+  start_date: [[ '%Y-%m-%dT00:00:00' | strftime ]]
   email_on_failure: False
   email_on_retry: False
   retries: 0
