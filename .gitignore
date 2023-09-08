@@ -8,3 +8,6 @@ logs/
 
 # data-pipelines-cli
 /build/
+
+# MacOs
+.DS_Store

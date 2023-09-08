@@ -12,10 +12,11 @@ This is an example of a simple [Data Pipelines](https://data-pipelines-cli.readt
 views, tests and seeds you can find it [here](https://github.com/getindata/tpc-h-data-pipelines-demo.git).
 
 ## Prerequisites
-- A project on [Google Cloud Platform](https://cloud.google.com/) - we will be running DP on [Vertex AI](https://cloud.google.com/vertex-ai)
-  Notebook and the results of our pipelines will be stored on [GCP BigQuery](https://cloud.google.com/bigquery)
-- Basic understanding of SQL
+- A project will be run on local machine
+   and the results of our pipelines will be stored on [GCP BigQuery](https://cloud.google.com/bigquery) connected with your project
+- Access to GCP account and projects via CLI 
 - Some experience with a command line
+- Basic understanding of SQL
 
 ## Data used
 For the purpose of this simple project demo we will use the data from 2 CSV files that are placed in the seeds folder.
@@ -25,44 +26,18 @@ No other data is being used. Data in both of the CSV files was generated.
 
 ### 1. Environment preparation
 
-Here we will explain how to make it possible to run [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) on an instance of
-[GCP Vertex AI JupyterLab Notebook](https://cloud.google.com/vertex-ai/docs/workbench/introduction). We start with the main page of our GCP project through [GCP console](https://console.cloud.google.com)
-
-![](images/project_console_choosing_vertexai.png)
-
-Choose [Vertex AI](https://cloud.google.com/vertex-ai) on the tool menu on the left of [GCP console](https://console.cloud.google.com). On the menu choose Workbench. You should be able to see currently existing Notebooks.
-
-![](images/creating_vertexai_notebook_existing_notebooks.png)
-
-For purpose of this example create a new notebook. We will be using our publically available environment image.
-Click `+ NEW NOTEBOOK` button. There choose `Customize...`. Name your notebook, specify Region, Zone
-and for environment scrollbar choose "Custom container" option.
-Then for docker container image instead of clicking ```select```, copy and paste this image:
+Here we will explain how to make it possible to run [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html). Let's first clone this repo to your machine and then  need to install Data Pipelines CLI:
 ```
-gcr.io/getindata-images-public/jupyterlab-dataops:bigquery-1.0.7
+pip install data-pipelines-cli[<flags>]
+```
+Depending on the systems that you want to integrate with you need to provide different flags in square brackets. For purpose of our project we will use:
+```
+pip install data-pipelines-cli[gcs,git,bigquery]
 ```
 
-For machine type, **n1-standard-1 (1 vCPU, 3.75 GB RAM)** should be good enough for the purpose of this demo.
-You can leave other parameters as they are and click ```Create button```.
+If you want to get more information about installation of Data Pipelines CLI follow the documentation - [Data Pipelines Documentation](https://data-pipelines-cli.readthedocs.io/en/latest/installation.html)
 
-![](images/creating_vertexai_notebook_options_filled_in_1.png)
-![](images/creating_vertexai_notebook_options_filled_in_2.png)
-
-After some time an instance of Notebook with proper image installed should be available. We should be able to start setting up
-the environment for our work.
-
-### 2. Opening the Notebook console
-
-Now, that our [GCP Vertex AI JupyterLab Notebook](https://cloud.google.com/vertex-ai/docs/workbench/introduction) instance has been created, we can open jupyterlab by clicking ```OPEN JUPYTERLAB``` next to the name of
-an instance that we just created. The interface for our notebook should open. Several options for working on the instance will be available.
-
-![](images/notebook_open_console.png)
-
-After clicking the ```Terminal``` it should appear in a moment.
-
-![](images/command_line_should_appear_shortly.png)
-
-### 3. Initialization of Data Pipelines tool
+### 2. Initialization of Data Pipelines tool
 
 We expect that the whole organization will be using the same [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) initialization project that specifies which
 templates (DP projects) they are using. Initialization makes it possible to set up some dp variables that can be used
@@ -90,7 +65,7 @@ and the template_paths to git repositories. You can also specify more vars for u
 The example initialization asks about the name of user, this name will be later used in other operations but
 you typically have to run init command only once.
 
-### 4. Creating our own project project
+### 3. Creating our own project
 
 After the initialization is complete we can start using DP. Now we will ```create``` a project using a project template.
 The ```dp create``` command can look like this:
@@ -129,7 +104,7 @@ Now let's enter the project folder.
 cd our-simple-project
 ```
 
-### 5. Config files in config directory
+### 4. Config files in config directory
 
 In the ```config``` directory you can find some environment configuration files. These files will be modified were generated from a project template that we used.
 When you want to use [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) in the future, you will be able to specify the configuration that is suitable for your project.
@@ -138,7 +113,7 @@ When you want to use [Data Pipelines](https://data-pipelines-cli.readthedocs.io/
 
 For the purpose of this demo you do not have to worry about making changes in these files. We can use the default configuration.
 
-### 6. Running pipelines and tests using Data Pipelines tool
+### 5. Running pipelines and tests using Data Pipelines tool
 
 This project consists of:
 - 2 ```seeds```
@@ -148,7 +123,7 @@ This project consists of:
 To understand more about ```models```, ```tests``` and ```seeds``` please read about them at the
 [DBT Documentation](https://docs.getdbt.com/docs/building-a-dbt-project/documentation).
 
-#### 6.1 Executing seeds
+#### 5.1 Executing seeds
 
 When we have our environment ready and the project has been created, the first thing we should do is to execute the ```seeds```.
 In this repository there are 2 CSV files specified that contain some data. DBT will use these 2 files as ```seeds```.
@@ -173,10 +148,10 @@ Below is a picture that presents the contents of 2 tables generated in BigQuery 
 ![](images/simple_bigquery_seed.png)
 
 
-#### 6.2 Executing models
+#### 5.2 Executing models
 
 The contents of the tables that were created in the ```Executing seeds``` step can be later used in some of the models that we specify.
-Now we should be ready to run our models. In the models folder of our template we have specified 1 model that uses the 2```seed``` tables.
+Now we should be ready to run our models. In the models folder of our template we have specified 1 model that uses the 2 ```seed``` tables.
 
 Execute the command.
 
@@ -190,7 +165,7 @@ This process will look at the contents of the models directory and create coresp
 
 ![](images/simple_run_bigquery.png)
 
-#### 6.3 Executing tests
+#### 5.3 Executing tests
 
 Now after all the tables and views are created we can also check, if the models work as intended by running the tests.
 We can have tests that check if the logic behind a query works as intended for a set of data. Let's run the tests.
@@ -206,7 +181,7 @@ We should be able to see the summary, we can see if everything with our models i
 ### Next steps
 If you are interested in more advanced use of [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) you can check
 [this repository](https://github.com/getindata/tpc-h-data-pipelines-demo.git). By familiarizing yourself with this resource, you will get 
- a better understanding on how [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) could look like in your production project. Remember to push your work on a [Vertex AI](https://cloud.google.com/vertex-ai) notebook instance to your [Git](https://git-scm.com/doc) repository before stopping it if you want to continue in the future.
+ a better understanding on how [Data Pipelines](https://data-pipelines-cli.readthedocs.io/en/latest/index.html) could look like in your production project. Remember to push your work to your [Git](https://git-scm.com/doc) repository before stopping it if you want to continue in the future.
 
 ## Resources
 
