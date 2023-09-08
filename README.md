@@ -65,7 +65,7 @@ and the template_paths to git repositories. You can also specify more vars for u
 The example initialization asks about the name of user, this name will be later used in other operations but
 you typically have to run init command only once.
 
-### 3. Creating our own project project
+### 3. Creating our own project
 
 After the initialization is complete we can start using DP. Now we will ```create``` a project using a project template.
 The ```dp create``` command can look like this:
